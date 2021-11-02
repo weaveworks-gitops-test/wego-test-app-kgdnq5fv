@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: my-nginx-udrvit
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-udrvit
+  namespace: my-nginx-udrvit
+  labels:
+    name: nginx-udrvit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: nginx-udrvit
+  template:
+    metadata:
+      namespace: my-nginx-udrvit
+      labels:
+        name: nginx-udrvit
+    spec:
+      containers:
+      - name: nginx-udrvit
+        image: nginx
+        ports:
+        - containerPort: 80
+
